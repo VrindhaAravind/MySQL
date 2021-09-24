@@ -1,0 +1,43 @@
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.25 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use userposts;
+Database changed
+
+
+mysql> create table user(user_id int,user_name varchar(30));
+Query OK, 0 rows affected (0.66 sec)
+
+mysql> insert into user values(12321,'Alex');
+Query OK, 1 row affected (0.49 sec)
+
+mysql> alter table user add primary key(user_id);
+Query OK, 0 rows affected (2.78 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into user values(53271,'Mahmoud');
+Query OK, 1 row affected (0.18 sec)
+mysql> insert into user values(35621,'Celine');
+Query OK, 1 row affected (0.18 sec)
+mysql> insert into user values(86471,'Maria');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> select * from user;
++---------+-----------+
+| user_id | user_name |
++---------+-----------+
+|   12321 |  Alex     |
+|   53271 |  Mahmoud  |
+|   35621 |  Celine   |
+|   86471 |  Maria    |
++---------+-----------+
+2 rows in set (0.09 sec)

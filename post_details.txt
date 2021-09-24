@@ -1,0 +1,74 @@
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database userposts;
+Query OK, 1 row affected (2.05 sec)
+
+mysql> use userposts;
+Database changed
+
+
+mysql> create table post_details(post_id int,images blob(30));
+Query OK, 0 rows affected (3.30 sec)
+
+
+mysql> desc post_details;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| post_id | int      | YES  |     | NULL    |       |
+| images  | tinyblob | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+2 rows in set (0.03 sec)
+
+mysql> alter table post_details modify images longblob;
+Query OK, 1 row affected (2.68 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> insert into post_details values (13425,load_file('C:/Users/aravind-user/Desktop/Bootstrap/book6.jpg'));
+Query OK, 1 row affected (0.08 sec)
+
+mysql> create table post_details(post_id int(5) PRIMARY KEY,image longblob NOT NULL);
+Query OK, 0 rows affected, 1 warning (0.56 sec)
+
+mysql> desc post_details;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| post_id | int      | NO   | PRI | NULL    |       |
+| image   | longblob | NO   |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+2 rows in set (0.11 sec)
+
+mysql> insert into post_details values(12785,'C:\Users\aravind-user\Desktop\book5');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select * from post_details;
++---------+------------------------------------------------------------------+
+| post_id | image                                                            |
++---------+------------------------------------------------------------------+
+|   12785 | 0x433A557365727361726176696E642D757365724465736B746F70086F6F6B35 |
++---------+------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into post_details values (13425,'C:/Users/aravind-user/Desktop/Bootstrap/book3.jpg');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into post_details values (35271,'C:/Users/aravind-user/Desktop/Bootstrap/book1.jpg');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from post_details;
++---------+------------------------------------------------------------------------------------------------------+
+| post_id | image                                                                                                |
++---------+------------------------------------------------------------------------------------------------------+
+|   12785 | 0x433A557365727361726176696E642D757365724465736B746F70086F6F6B35                                     |
+|   13425 | 0x433A2F55736572732F61726176696E642D757365722F4465736B746F702F426F6F7473747261702F626F6F6B332E6A7067 |
+|   35271 | 0x433A2F55736572732F61726176696E642D757365722F4465736B746F702F426F6F7473747261702F626F6F6B312E6A7067 |
++---------+------------------------------------------------------------------------------------------------------+
+3 rows in set (0.00 sec)

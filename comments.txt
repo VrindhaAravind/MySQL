@@ -1,0 +1,49 @@
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.25 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create table comments(post_id int(5),comments text(100),foreign key(post_id) references post_details(post_id));
+Query OK, 0 rows affected, 1 warning (4.56 sec)
+
+mysql> alter table comments add column likes BOOLEAN DEFAULT FALSE;
+Query OK, 0 rows affected (1.21 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc comments;
++----------+------------+------+-----+---------+-------+
+| Field    | Type       | Null | Key | Default | Extra |
++----------+------------+------+-----+---------+-------+
+| post_id  | int        | YES  | MUL | NULL    |       |
+| comments | text       | YES  |     | NULL    |       |
+| likes    | tinyint(1) | YES  |     | 0       |       |
++----------+------------+------+-----+---------+-------+
+3 rows in set (0.18 sec)
+
+mysql> ALTER TABLE comments ADD column user_id int(5),foreign key(user_id) references user(user_id);
+Query OK, 0 rows affected, 1 warning (0.94 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> insert into comments values(12785,'Good post',true,12321);
+Query OK, 1 row affected (0.19 sec)
+
+mysql> insert into comments values(12785,'nice',false,53271);
+Query OK, 1 row affected (0.12 sec)
+
+
+mysql> select * from comments;
++---------+-----------+-------+---------+
+| post_id | comments  | likes | user_id |
++---------+-----------+-------+---------+
+|   12785 | Good post |     1 |   12321 |
+|   12785 | nice      |     0 |   53271 |
++---------+-----------+-------+---------+
+2 rows in set (0.14 sec)
